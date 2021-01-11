@@ -1,9 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+
 function Movie({year,title,summary,poster,genres}){
+    
+    // 이 부분을 함수로 빼는 것이 좋나요?
+    if (summary.length >100){
+        summary = summary.slice(0,100) + ". . .";
+    }
+
     return <div className="movie">
-        <img src={poster} alt={title} title={title}/>
+        <div class="movie__poster">
+            <img src={poster} alt={title} title={title}/>
+        </div>
         <div className="movie__data">
             <h3 className="movie__title">{title}</h3>
             <h5 className="movie__year">{year}</h5>

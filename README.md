@@ -131,3 +131,24 @@ BEM Naming 어떤 컴포넌트에서 무슨 역할을 하는지 ex ) card__title
 얘 확인하기.
 genres : PropTypes.arrayOf(PropTypes.string).isRequired
 
+
+
+
+## 1.11
+
+current 사용방법 익히기
+
+setState(updater, callback)
+call back 함수 이후 render이 됩니다. state를 여기서 체크해주면 되는걸까?
+
+
+음 글자 길이가 100자가 넘으면 줄이고 싶은데, 이걸 app component에서 처리할까? 아니면 Movie component에서 처리할까?
+
+APP에서는 접근이 불가한듯?
+
+Movie.js에서 하면 자르는 부분을 함수로 빼는것이 좋을까?
+
+img가운데 정렬 text도 되네?
+
+spinner 참고 사이트
+[Spinner](https://projects.lukehaas.me/css-loaders/)
