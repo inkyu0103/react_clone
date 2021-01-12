@@ -1,84 +1,36 @@
-import React from "react";
-import axios from "axios";
-import Movie from "./Movie";
-import "./App.css";
+import React,{useEffect, useState} from 'react';
+
+const Counter = () =>{
+    const[value,setValue] = useState(0);
 
 
-class App extends React.Component{
-  state ={
-    isLoading : true,
-    movies : [],
-    movie_idx : 0
-  }
-
-
-   getMovies = async() =>{
-    const {data:{data:{movies}}} = await axios.get("https://yts-proxy.nomadcoders1.now.sh/list_movies.json");
-    console.log(movies);    
-    this.setState({movies , isLoading:false});
-  }
-
-
-
-  // array의 length를 기준으로 합시다!
-  nextMovie = () =>{
-    // 현재의 idx가 마지막이라면
-    if (this.state.movie_idx === this.state.movies.length-1){
-      this.setState({movie_idx:0});
+    const plus = () =>{
+        //console.log(this); undefined 
+        //console.log(this.value); error
+        setValue(value+1);
     }
-    else{
-      this.setState(current =>({movie_idx : current.movie_idx+1}));
+
+    const minus =() =>{
+        setValue(value-1);
     }
-    
- 
-  }
 
-  beforeMovie = () =>{
-    if (this.state.movie_idx === 0 ){
-      this.setState({movie_idx : 19});
-    } else{
-      this.setState(current =>({movie_idx:current.movie_idx-1}));
-    }
-  }
+    useEffect(()=>{
+        //이건 처음에 렌더링이 될 떄 (componentDidMount)
+        // 업데이트 되었을 때 (componentDidUpdate)둘 다 떠야한다.
+        console.log('렌더링이 완료되었습니다.');
+    });
 
 
-  // 처음으로 Mount 했을 때
-  componentDidMount(){
-    console.log("first render");
-    this.getMovies();
-  }
 
-  
-  componentDidUpdate(){
-    console.log("Updated (render)");
-  }
-
-  render(){
-    const { isLoading ,movies } = this.state
     return(
-      <section className="container">
-        {isLoading ? (
-          <div className="loader">
-            
-          </div>
-          ) : (
-            <div className="movies">
-              <div class="movies__header"></div>
-              <Movie key={movies[this.state.movie_idx].id} year={movies[this.state.movie_idx].year} title={movies[this.state.movie_idx].title} summary={movies[this.state.movie_idx].summary} poster={movies[this.state.movie_idx].medium_cover_image} genres={movies[this.state.movie_idx].genres} id = {movies[this.state.movie_idx].id} /> 
-              <div class="buttons">
-                <a onClick={this.beforeMovie}><i class="fas fa-chevron-left"></i></a>
-                <a onClick={this.nextMovie}><i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-            
-            
-            )}
-          
-            </section>
+        <div>
+            <p>현재 카운터 값은 {value}입니다.</p>
+            <button onClick={plus}>+</button>
+            <button onClick={minus}>-</button>
+        </div>
     )
-  }
 }
-export default App;
 
 
-//render는 왜 ()만 있고...
+export default Counter
+
